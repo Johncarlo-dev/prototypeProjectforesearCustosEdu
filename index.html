@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CustosEdu | Academic Digital Vault</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div id="toastNotification" class="toast-notification" role="status" aria-live="polite" hidden></div>
+
+
+
+<header>
+
+    <div class="logo">
+
+        <img src="logo.png" alt="CustosEdu Logo" onerror="this.style.display='none'">
+
+        <div>
+
+            <h1>CustosEdu</h1>
+
+            <p>Your Digital Academic Document Library</p>
+
+        </div>
+
+    </div>
+
+
+
+    <nav>
+
+        <a href="#home" onclick="showPage('home')">Home</a>
+
+        <a href="#documents" onclick="showPage('documents')">Documents</a>
+
+        <a href="#about" onclick="showPage('about')">About</a>
+
+        <button id="settingsNavBtn" onclick="showPage('settings')" hidden>
+
+            Account Settings
+
+        </button>
+
+        <button id="logoutBtn" onclick="logout()" hidden>Logout</button>
+
+    </nav>
+
+</header>
+
+
+
+<section id="home" class="page">
+
+    <div class="container hero">
+
+        <div class="hero-content">
+
+            <span class="tag">ACADEMIC DIGITAL VAULT</span>
+
+            <h2>Welcome to <span>CustosEdu</span></h2>
+
+            <p>Your digital academic library for storing, organizing, searching, viewing, and downloading educational files.</p>
+
+
+
+            <div class="hero-buttons">
+
+                <button id="homeLoginBtn" onclick="showPage('login')">Login</button>
+
+                <button id="homeRegisterBtn" class="secondary-btn" onclick="showPage('register')">Create Account</button>
+
+                <button id="openLibraryBtn" onclick="openLibrary()" hidden>Open Document Library</button>
+
+            </div>
+
+
+
+            <div class="home-profile" id="homeProfile" hidden>
+                <img id="homeProfilePicture" alt="Your profile picture">
+                <span id="homeProfileName"></span>
+            </div>
+            <p id="welcomeMessage" class="welcome-message"></p>
+
+        </div>
+
+
+
+        <div class="hero-icon">
+
+            <div class="book-symbol">📚</div>
+
+            <h3>Digital Academic Vault</h3>
+
+            <p>Keep your academic files organized in one place.</p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">📁</div>
+
+            <h3>Organize</h3>
+
+            <p>Organize your academic files by category.</p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🔍</div>
+
+            <h3>Search</h3>
+
+            <p>Quickly find your saved academic files.</p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">📄</div>
+
+            <h3>Multiple File Types</h3>
+
+            <p>Store PDFs, photos, and videos in your digital vault.</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section id="login" class="page" hidden>
+
+    <div class="container auth-box">
+
+        <div class="auth-heading">
+
+            <div class="auth-icon">🔐</div>
+
+            <h2>Welcome Back</h2>
+
+            <p>Log in to access your academic vault.</p>
+
+        </div>
+
+
+
+        <form id="loginForm">
+
+            <label for="loginUsername">Username</label>
+
+            <input type="text" id="loginUsername" placeholder="Enter your username" required>
+
+
+
+            <label for="loginPassword">Password</label>
+
+            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+
+
+
+            <button type="submit">Login to CustosEdu</button>
+
+        </form>
+
+
+
+        <p class="auth-link">Don't have an account?
+
+            <a href="#register" onclick="showPage('register')">Register here</a>
+
+        </p>
+
+        <p class="auth-link">
+
+            <a href="#forgot" onclick="showPage('forgot')">Forgot Password?</a>
+
+        </p>
+
+        <p id="loginMessage" class="message"></p>
+
+    </div>
+
+</section>
+
+
+
+<section id="register" class="page" hidden>
+
+    <div class="container auth-box">
+
+        <div class="auth-heading">
+
+            <div class="auth-icon">👤</div>
+
+            <h2>Create Account</h2>
+
+            <p>Create your CustosEdu account.</p>
+
+        </div>
+
+
+
+        <div class="info-box">There is no fixed account limit in this prototype.</div>
+
+
+
+        <form id="registerForm">
+
+            <label for="regUsername">Username</label>
+
+            <input type="text" id="regUsername" minlength="3" maxlength="30"
+
+                   placeholder="Create a username" required>
+
+
+
+            <label for="regPassword">Password</label>
+
+            <input type="password" id="regPassword" minlength="6"
+
+                   placeholder="Create a password" required>
+
+
+
+            <label for="regBirthdayMonth">Birthday</label>
+            <div class="birthday-row" data-birthday="regBirthday">
+                <select id="regBirthdayMonth" aria-label="Birthday month" required>
+                    <option value="">Month</option>
+                    <option value="01">January</option><option value="02">February</option>
+                    <option value="03">March</option><option value="04">April</option>
+                    <option value="05">May</option><option value="06">June</option>
+                    <option value="07">July</option><option value="08">August</option>
+                    <option value="09">September</option><option value="10">October</option>
+                    <option value="11">November</option><option value="12">December</option>
+                </select>
+                <select id="regBirthdayDay" aria-label="Birthday day" required>
+                    <option value="">Day</option>
+                </select>
+                <div class="year-picker">
+                    <button type="button" class="year-step" data-year-step="-1" aria-label="Previous year">▼</button>
+                    <select id="regBirthdayYear" aria-label="Birthday year" required>
+                        <option value="">Year</option>
+                    </select>
+                    <button type="button" class="year-step" data-year-step="1" aria-label="Next year">▲</button>
+                </div>
+            </div>
+            <input type="hidden" id="regBirthday" value="">
+            <small>Select month, day, and year. Use the arrows to adjust the year.</small>
+
+
+
+            <label for="regFavorite">Favorite Color or Thing</label>
+
+            <input type="text" id="regFavorite"
+
+                   placeholder="Create a recovery answer" required>
+
+
+
+            <button type="submit">Create Account</button>
+
+        </form>
+
+
+
+        <p class="auth-link">Already registered?
+
+            <a href="#login" onclick="showPage('login')">Login here</a>
+
+        </p>
+
+        <p id="registerMessage" class="message"></p>
+
+    </div>
+
+</section>
+
+
+
+<section id="forgot" class="page" hidden>
+
+    <div class="container auth-box">
+
+        <div class="auth-heading">
+
+            <div class="auth-icon">🔑</div>
+
+            <h2>Reset Password</h2>
+
+            <p>Verify your account to create a new password.</p>
+
+        </div>
+
+
+
+        <form id="forgotForm">
+
+            <label for="forgotUsername">Username</label>
+
+            <input type="text" id="forgotUsername" required>
+
+
+
+            <label for="forgotBirthdayMonth">Birthday</label>
+            <div class="birthday-row" data-birthday="forgotBirthday">
+                <select id="forgotBirthdayMonth" aria-label="Birthday month" required>
+                    <option value="">Month</option>
+                    <option value="01">January</option><option value="02">February</option>
+                    <option value="03">March</option><option value="04">April</option>
+                    <option value="05">May</option><option value="06">June</option>
+                    <option value="07">July</option><option value="08">August</option>
+                    <option value="09">September</option><option value="10">October</option>
+                    <option value="11">November</option><option value="12">December</option>
+                </select>
+                <select id="forgotBirthdayDay" aria-label="Birthday day" required>
+                    <option value="">Day</option>
+                </select>
+                <div class="year-picker">
+                    <button type="button" class="year-step" data-year-step="-1" aria-label="Previous year">▼</button>
+                    <select id="forgotBirthdayYear" aria-label="Birthday year" required>
+                        <option value="">Year</option>
+                    </select>
+                    <button type="button" class="year-step" data-year-step="1" aria-label="Next year">▲</button>
+                </div>
+            </div>
+            <input type="hidden" id="forgotBirthday" value="">
+            <small>Select month, day, and year. Use the arrows to adjust the year.</small>
+
+
+
+            <label for="forgotFavorite">Favorite Color or Thing</label>
+
+            <input type="text" id="forgotFavorite" required>
+
+
+
+            <label for="newPassword">New Password</label>
+
+            <input type="password" id="newPassword" minlength="6" required>
+
+
+
+            <label for="confirmPassword">Confirm New Password</label>
+
+            <input type="password" id="confirmPassword" minlength="6" required>
+
+
+
+            <label class="confirm-label">
+
+                <input type="checkbox" id="robotCheck" required>
+
+                I'm not a robot
+
+            </label>
+
+
+
+            <button type="submit">Reset Password</button>
+
+        </form>
+
+
+
+        <p class="auth-link">
+
+            <a href="#login" onclick="showPage('login')">Back to Login</a>
+
+        </p>
+
+        <p id="forgotMessage" class="message"></p>
+
+    </div>
+
+</section>
+
+
+
+<section id="documents" class="page" hidden>
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <h2>My Digital Vault</h2>
+
+            <p>Upload and manage your academic files.</p>
+
+        </div>
+
+
+
+        <div class="upload-box">
+
+            <h3>Upload a File</h3>
+
+            <form id="uploadForm">
+
+                <label for="documentTitle">File Title</label>
+
+                <input type="text" id="documentTitle" placeholder="Enter file title" required>
+
+
+
+                <label for="documentCategory">Category</label>
+
+                <select id="documentCategory" required>
+
+                    <option value="Research">Research</option>
+
+                    <option value="Modules">Modules</option>
+
+                    <option value="Books">Books</option>
+
+                    <option value="School Files">School Files</option>
+
+                    <option value="Photos">Photos</option>
+
+                    <option value="Videos">Videos</option>
+
+                    <option value="Others">Others</option>
+
+                </select>
+
+
+
+                <label for="pdfFile">Choose File</label>
+
+                <input type="file" id="pdfFile" accept=".pdf,image/\*,video/\*" required>
+
+                <small>PDF, images, and videos. Maximum 100 MB per file.</small>
+
+
+
+                <button type="submit">Upload File</button>
+
+            </form>
+
+            <p id="uploadMessage" class="message"></p>
+
+        </div>
+
+
+
+        <div class="search-box">
+
+            <h3>Search Files</h3>
+
+            <input type="text" id="searchInput" placeholder="Search title, category, or filename...">
+
+
+
+            <label for="categoryFilter">Filter by Category</label>
+
+            <select id="categoryFilter">
+
+                <option value="All">All Categories</option>
+
+                <option value="Research">Research</option>
+
+                <option value="Modules">Modules</option>
+
+                <option value="Books">Books</option>
+
+                <option value="School Files">School Files</option>
+
+                <option value="Photos">Photos</option>
+
+                <option value="Videos">Videos</option>
+
+                <option value="Others">Others</option>
+
+            </select>
+
+        </div>
+
+
+
+        <div class="section-heading">
+
+            <h2>Available Files</h2>
+
+            <p>Your uploaded academic files appear here.</p>
+
+        </div>
+
+
+
+        <div id="documentList" class="document-list"></div>
+
+        <p id="documentMessage" class="message"></p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ACCOUNT SETTINGS -->
+
+<section id="settings" class="page" hidden>
+
+    <div class="container auth-box settings-box">
+
+        <div class="auth-heading">
+
+            <div class="auth-icon">⚙️</div>
+
+            <h2>Account Settings</h2>
+
+            <p>Customize your profile and manage your CustosEdu account.</p>
+
+        </div>
+
+
+
+        <div class="settings-section">
+
+            <h3>Customize Profile</h3>
+
+            <form id="profileForm">
+
+                <label for="displayName">Display Name</label>
+
+                <input type="text" id="displayName" maxlength="40"
+
+                       placeholder="Your display name" required>
+
+
+
+                <label for="profilePicture">Profile Picture (optional)</label>
+
+                <input type="file" id="profilePicture" accept="image/png,image/jpeg,image/webp">
+
+                <img id="profilePreview" class="profile-preview" alt="Profile preview" hidden>
+
+
+
+                <button type="submit">Save Profile</button>
+
+            </form>
+
+        </div>
+
+
+
+        <div class="settings-section">
+
+            <h3>Appearance</h3>
+
+            <label for="themeSelect">Choose Theme</label>
+
+            <select id="themeSelect">
+
+                <option value="light">Light Theme</option>
+
+                <option value="dark">Dark Theme</option>
+
+            </select>
+
+            <button type="button" onclick="saveTheme()">Save Appearance</button>
+
+        </div>
+
+
+
+        <div class="settings-section">
+
+            <h3>Change Password</h3>
+
+            <form id="changePasswordForm">
+
+                <label for="currentPassword">Current Password</label>
+
+                <input type="password" id="currentPassword" required>
+
+
+
+                <label for="settingsNewPassword">New Password</label>
+
+                <input type="password" id="settingsNewPassword" minlength="6" required>
+
+
+
+                <label for="settingsConfirmPassword">Confirm New Password</label>
+
+                <input type="password" id="settingsConfirmPassword" minlength="6" required>
+
+
+
+                <button type="submit">Update Password</button>
+
+            </form>
+
+        </div>
+
+
+
+        <div class="settings-section danger-section">
+
+            <h3>Delete Account</h3>
+
+            <p>Deleting your account permanently removes your account and its files stored in this browser.</p>
+
+
+
+            <label for="deleteAccountPassword">Enter Password to Confirm</label>
+
+            <input type="password" id="deleteAccountPassword">
+
+
+
+            <label class="confirm-label">
+
+                <input type="checkbox" id="confirmDeleteAccount">
+
+                I understand this action cannot be undone.
+
+            </label>
+
+
+
+            <button type="button" class="delete-btn" onclick="deleteAccount()">
+
+                Permanently Delete My Account
+
+            </button>
+
+        </div>
+
+
+
+        <p id="settingsMessage" class="message" role="status"></p>
+
+    </div>
+
+</section>
+
+
+
+<section id="about" class="page" hidden>
+
+    <div class="container about-box">
+
+        <span class="tag">ABOUT THE PROJECT</span>
+
+        <h2>About CustosEdu</h2>
+
+        <p>CustosEdu is a digital academic document management system designed to help students organize and access educational materials.</p>
+
+
+
+        <h3>Meaning of CustosEdu</h3>
+
+        <p>The name comes from the Latin word "Custos," meaning guardian or keeper, and "Edu," referring to education.</p>
+
+
+
+        <h3>Purpose</h3>
+
+        <p>The system provides a simple way to store, search, view, and download academic files through a digital vault.</p>
+
+
+
+        <div class="info-box">
+
+            CustosEdu is a school project prototype. Accounts and files are stored locally in the browser.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<footer>
+
+    <h3>CustosEdu</h3>
+
+    <p>Your Digital Academic Document Library</p>
+
+    <p class="copyright">&copy; 2026 CustosEdu | Academic Digital Vault</p>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
